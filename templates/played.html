@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>played</title>
+</head>
+
+<body>
+    <h1>total matches played by teams</h1>
+    <table border="1px">
+        <tr>
+            <th>Team</th>
+            <th>Total matche win</th>
+        </tr>
+
+        {% for teams in res %}
+        <tr>
+            <td>{{teams.team1}}</td>
+            <td>{{teams.win}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+
+</body>
+
+</html>
