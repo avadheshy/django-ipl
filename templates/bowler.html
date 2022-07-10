@@ -8,8 +8,19 @@
 </head>
 <body>
     <h1>most economical bowler in 2015 </h1>
-    {% for i in res%}
-    <li>{{i}}</li>
+    <table border="1px">
+        <tr>
+            <th>bowler</th>
+            <th>economy</th>
+        </tr>
+        {% for bowlers in res%}
+        <tr>
+            <td>{{bowlers.bowler}}</td>
+            <td>{{bowlers.economy}}</td>
+        </tr>
     {% endfor %}
+    </table>
+
+    
 </body>
 </html>

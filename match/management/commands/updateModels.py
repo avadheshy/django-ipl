@@ -1,6 +1,5 @@
-from django.core.management.base import BaseCommand
 import csv
-
+from django.core.management.base import BaseCommand
 from match.models import Matches, Deliveries
 
 
@@ -11,56 +10,60 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        # database connections here
-        with open('matches.csv') as f:
-            match_obj = csv.DictReader(f)
-            for match in match_obj:
-                model=Matches(
-                id=match['id'],
-                season=match['season'],
-                city=match['city'],
-                date=match['date'],
-                team1=match['team1'],
-                team2=match['team2'],
-                toss_winner=match['toss_winner'],
-                toss_decision=match['toss_decision'],
-                result=match['result'],
-                dl_applied=match['dl_applied'],
-                winner=match['winner'],
-                win_by_runs=match['win_by_runs'],
-                win_by_wickets=match['win_by_wickets'],
-                player_of_match=match['player_of_match'],
-                venue=match['venue'],
-                umpire1=match['umpire1'],
-                umpire2=match['umpire2'],
-                umpire3=match['umpire3'])
-                model.save()
-        with open('deliveries.csv', 'r') as file:
-            delivery_obj = csv.DictReader(file)
-            for delivery in delivery_obj:
-                model=Deliveries(
-                match_id_id=delivery['match_id'],
-                inning = delivery['inning'],
-                batting_team =delivery['batting_team'] ,
-                bowling_team = delivery['bowling_team'],
-                over = delivery['over'],
-                ball = delivery['ball'],
-                batsman = delivery['batsman'],
-                non_striker = delivery['non_striker'],
-                bowler = delivery['bowler'],
-                is_super_over = delivery['is_super_over'],
-                wide_runs = delivery['wide_runs'],
-                bye_runs = delivery['bye_runs'],
-                legbye_runs = delivery['legbye_runs'],
-                noball_runs = delivery['noball_runs'],
-                penalty_runs = delivery['penalty_runs'],
-                batsman_runs = delivery['batsman_runs'],
-                extra_runs = delivery['extra_runs'],
-                total_runs = delivery['total_runs'],
-                player_dismissed = delivery['player_dismissed'],
-                dismissal_kind = delivery['dismissal_kind'],
-                fielder =   delivery['fielder'],)
-                model.save()
-                
+        file1 = 'matches.csv'
+        with open(file1) as f:
+            reader = csv.DictReader(f)
+            matches_list = list(reader)
+        for row in matches_list:
+            models = Matches(
+                season=row['season'],
+                city=row['city'],
+                date=row['date'],
+                team1=row['team1'],
+                team2=row['team2'],
+                toss_winner=row['toss_winner'],
+                toss_decision=row['toss_decision'],
+                result=row['result'],
+                dl_applied=row['dl_applied'],
+                winner=row['winner'],
+                win_by_runs=row['win_by_runs'],
+                win_by_wickets=row['win_by_wickets'],
+                player_of_match=row['player_of_match'],
+                venue=row['venue'],
+                umpire1=row['umpire1'],
+                umpire2=row['umpire2'],
+            )
+            models.save()
+
+        file2 = 'deliveries.csv'
+        with open(file2) as f:
+            reader = csv.DictReader(f)
+            deliveries_list = list(reader)
+        for row in deliveries_list:
+            models = Deliveries(
+                match_id=row['match_id'],      
+                inning=row['inning'],
+                batting_team=row['batting_team'],
+                bowling_team=row['bowling_team'],
+                over=row['over'],
+                ball=row['ball'],
+                batsman=row['batsman'],
+                non_striker=row['non_striker'],
+                bowler=row['bowler'],
+                is_super_over=row['is_super_over'],
+                wide_runs=row['wide_runs'],
+                bye_runs=row['bye_runs'],
+                legbye_runs=row['legbye_runs'],
+                noball_runs=row['noball_runs'],
+                penalty_runs=row['penalty_runs'],
+                batsman_runs=row['batsman_runs'],
+                extra_runs=row['extra_runs'],
+                total_runs=row['total_runs'],
+                player_dismissed=row['player_dismissed'],
+                dismissal_kind=row['dismissal_kind'],
+                fielder=row['fielder']
+            )
+            models.save()
+
             
 

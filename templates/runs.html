@@ -8,8 +8,18 @@
 </head>
 <body>
     <h1>runs conseded by teams in year 2016</h1>
-    {% for i in res%}
-    <li>{{i}}</li>
+    <table border="1px">
+        <tr>
+            <th>Team</th>
+            <th>Extra runs</th>
+        </tr>
+        {% for teams in res%}
+        <tr>
+            <td>{{teams.bowling_team}}</td>
+            <td>{{teams.extras}}</td>
+        </tr>
     {% endfor %}
+    </table>
+
 </body>
 </html>

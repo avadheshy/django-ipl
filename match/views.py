@@ -1,3 +1,4 @@
+from unittest import result
 from django.shortcuts import render
 from match.models import Matches,Deliveries
 from django.db.models import Count,Sum
@@ -6,19 +7,18 @@ from django.db.models import Count,Sum
 def index(request):
     return render(request,'index.html')
 def played(request):
-    result=Matches.objects.values('team1').annotate(win=Count('id'))
+    result=Matches.objects.values('season').annotate(play=Count('id')).order_by('season')
     return render(request,'played.html',{'res':result})
 def won(request):
     result=Matches.objects.values('season','winner').order_by('season').annotate(win=Count('winner'))
+    
     return render(request,'won.html',{'res':result})
 def runs(request):
-    result=Matches.objects.values(season=2015).select_related(
-        Deliveries.objects.values('bowling_team',
-    'extra_runs').annotate(Sum('extra_runs')))
+    result=Deliveries.objects.filter(match__season=2016).values('bowling_team').annotate(extras=Sum('extra_runs')).order_by('extras')
     return render(request,'runs.html',{'res':result})
 
 
 def bowler(request):
-    result=Matches.objects.values_list('id').filter(season=2015)
+    result=Deliveries.objects.filter(match__season=2015).values('bowler').annotate(economy=Sum('total_runs')*6/Count('id')).order_by('economy')[0:10]
     return render(request,'bowler.html',{'res':result})
     

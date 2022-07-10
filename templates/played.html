@@ -12,14 +12,14 @@
     <h1>total matches played by teams</h1>
     <table border="1px">
         <tr>
-            <th>Team</th>
-            <th>Total matche win</th>
+            <th>Season</th>
+            <th>Total matche played </th>
         </tr>
 
         {% for teams in res %}
         <tr>
-            <td>{{teams.team1}}</td>
-            <td>{{teams.win}}</td>
+            <td>{{teams.season}}</td>
+            <td>{{teams.play}}</td>
         </tr>
 
         {% endfor %}
