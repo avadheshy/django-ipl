@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Matches(models.Model):
     season = models.PositiveIntegerField()
     city = models.CharField(max_length=200)
@@ -19,7 +21,6 @@ class Matches(models.Model):
     umpire1 = models.CharField(max_length=200)
     umpire2 = models.CharField(max_length=200)
 
-    
 
 class Deliveries(models.Model):
     match = models.ForeignKey(Matches, on_delete=models.CASCADE, null=True)

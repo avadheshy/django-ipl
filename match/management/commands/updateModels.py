@@ -41,7 +41,7 @@ class Command(BaseCommand):
             deliveries_list = list(reader)
         for row in deliveries_list:
             models = Deliveries(
-                match_id=row['match_id'],      
+                match_id=row['match_id'],
                 inning=row['inning'],
                 batting_team=row['batting_team'],
                 bowling_team=row['bowling_team'],
@@ -64,6 +64,3 @@ class Command(BaseCommand):
                 fielder=row['fielder']
             )
             models.save()
-
-            
-
